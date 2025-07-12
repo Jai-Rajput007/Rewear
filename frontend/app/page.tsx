@@ -10,7 +10,7 @@ const ProductListingsSection = dynamic(() => import('@/components/ProductListing
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
+    <main className="min-h-screen bg-white dark:bg-black text-gray-900 dark:text-white">
       <Header />
       <div className="pt-28 pb-16"> {/* Add padding to account for fixed header */}
         <HeroSection />
