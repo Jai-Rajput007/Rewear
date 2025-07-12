@@ -1,0 +1,42 @@
+### Signup Request
+POST http://localhost:8080/api/auth/signup
+Content-Type: application/json
+
+{
+  "name": "Jiyanshi",
+  "email": "jiyanshi@example.com",
+  "password": "123456"
+}
+
+
+### Login Request
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "jiyanshi@example.com",
+  "password": "123456"
+}
+
+### Protected Dashboard Route
+GET http://localhost:8080/api/user/dashboard
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NzFlY2YzNzkyOGY2YzFlNTMwYjEzNCIsImlhdCI6MTc1MjI5Njc4NCwiZXhwIjoxNzUyOTAxNTg0fQ.LXih14qGf9gTPhUjjJ3_LccO0YNjOCWUIA9HZ0eBGLs
+
+
+### Add new item (no image yet)
+POST http://localhost:8080/api/items
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NzFlY2YzNzkyOGY2YzFlNTMwYjEzNCIsImlhdCI6MTc1MjI5Nzc5MiwiZXhwIjoxNzUyOTAyNTkyfQ.cMzYyVNV-ZGLwrD035mnrL_fqVxDH5oFXALuPEv2QVA
+
+{
+  "title": "Blue Denim Jacket",
+  "description": "Slightly used denim jacket, still in great condition",
+  "category": "Clothing",
+  "type": "Jacket",
+  "size": "M",
+  "condition": "Gently Used",
+  "tags": ["denim", "blue", "jacket"]
+}
+
+
+
