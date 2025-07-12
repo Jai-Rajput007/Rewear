@@ -38,5 +38,31 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NzFlY2YzN
   "tags": ["denim", "blue", "jacket"]
 }
 
+### Register second user
+POST http://localhost:8080/api/auth/signup
+Content-Type: application/json
 
+{
+  "name": "Rahul",
+  "email": "rahul@example.com",
+  "password": "rahul123"
+}
+
+### Swap request for item listed by Jiyanshi
+POST http://localhost:8080/api/swaps/request/6871f7d0d0e9370245c8c7dc
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NzFmYzNhMmVlZWQxOGNjMWRjNGJlMiIsImlhdCI6MTc1MjMwMDYwMiwiZXhwIjoxNzUyOTA1NDAyfQ.KbE6_ZTYE3ugzAL_dhVAxMZWW5_t0mIVOdnDnpIccI8
+
+### Respond to Swap Request (Accept)
+PATCH http://localhost:8080/api/swaps/6871fc6c2eeed18cc1dc4be7/respond
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NzFlY2YzNzkyOGY2YzFlNTMwYjEzNCIsImlhdCI6MTc1MjMwMDc3NywiZXhwIjoxNzUyOTA1NTc3fQ.JTsGM4wVHstdG3QplQrJFRLW0YZeRBeFBosMFsO-j6I
+
+{
+  "status": "accepted"
+}
+
+###
+PATCH http://localhost:8080/api/items/approve/6871f7d0d0e9370245c8c7dc
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NzFlY2YzNzkyOGY2YzFlNTMwYjEzNCIsImlhdCI6MTc1MjMwMzM1MiwiZXhwIjoxNzUyOTA4MTUyfQ.WtPAO-23KBIC6UysFrIocEMkmPA70Y1xREVE1NFiLXc
+Content-Type: application/json
 
