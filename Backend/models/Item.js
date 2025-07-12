@@ -8,8 +8,22 @@ const itemSchema = new mongoose.Schema({
   size: String,
   condition: String,
   tags: [String],
-  imageUrls: [String], // I'll fill this in next step
-  status: { type: String, default: "available" }, // available / swapped / removed
+  imageUrls: [String],
+
+  // Updated status to include "redeemed"
+  status: {
+    type: String,
+    enum: ["available", "swapped", "redeemed"],
+    default: "available",
+  },
+
+  // Add point cost
+  pointCost: {
+    type: Number,
+    default: 10,
+  },
+
+  isApproved: { type: Boolean, default: false },
   listedBy: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
   createdAt: { type: Date, default: Date.now },
 });

@@ -7,6 +7,10 @@ const authRoutes = require("./routes/authRoutes");
 const userRoutes = require("./routes/userRoutes");
 const itemRoutes = require("./routes/itemRoutes");
 const swapRoutes = require("./routes/swapRoutes");
+<<<<<<< HEAD
+=======
+const redeemRoutes = require("./routes/redeemRoutes");
+>>>>>>> a18838929c1d1b424a82a7fdffa862ca161457be
 
 const app = express();
 
@@ -22,7 +26,11 @@ app.use("/api/auth", authRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api/items", itemRoutes);
 app.use("/api/swaps", swapRoutes);
+<<<<<<< HEAD
 
+=======
+app.use("/api/items", redeemRoutes);
+>>>>>>> a18838929c1d1b424a82a7fdffa862ca161457be
 
 // Root
 app.get("/", (req, res) => {
@@ -36,5 +44,5 @@ app.listen(PORT, () => {
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
-  console.log(`🚀 Server is running on port ${PORT}`);
+  console.log(`Server is running on port ${PORT}`);
 });
