@@ -39,4 +39,55 @@ router.post("/", protect, upload.array("images", 5), async (req, res) => {
   }
 });
 
+// @route   GET api/items
+// @desc    Get all items
+// @access  Public
+router.get('/', async (req, res) => {
+  try {
+    const limit = parseInt(req.query.limit, 10) || 0;
+    const items = await Item.find()
+      .sort({ createdAt: -1 })
+      .limit(limit)
+      .populate('listedBy', 'name');
+    res.json({ items });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
+// @route   GET api/items/my-items
+// @desc    Get all items for the logged-in user
+// @access  Private
+router.get('/my-items', protect, async (req, res) => {
+  try {
+    const items = await Item.find({ listedBy: req.user._id }).sort({ createdAt: -1 });
+    res.json({ items });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
+// @route   GET api/items/:id
+// @desc    Get single item by ID
+// @access  Public
+router.get('/:id', async (req, res) => {
+  try {
+    const item = await Item.findById(req.params.id).populate('listedBy', 'name email');
+
+    if (!item) {
+      return res.status(404).json({ msg: 'Item not found' });
+    }
+
+    res.json(item);
+  } catch (err) {
+    console.error(err.message);
+    if (err.kind === 'ObjectId') {
+      return res.status(404).json({ msg: 'Item not found' });
+    }
+    res.status(500).send('Server Error');
+  }
+});
+
 module.exports = router;

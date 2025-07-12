@@ -1,35 +1,29 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export default function HeroSection() {
   return (
-    <section className="relative">
-      <div className="bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-800 dark:to-purple-800 h-[500px] md:h-[600px] w-full flex items-center">
-        <div className="container mx-auto px-4 z-10">
-          <div className="max-w-2xl">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
-              Sustainable Fashion, One Swap at a Time
-            </h1>
-            <p className="text-xl text-gray-100 mb-8">
-              Join our community of eco-conscious fashion lovers. Swap, sell, or buy pre-loved clothing items and reduce fashion waste.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Button 
-                size="lg" 
-                className="bg-white text-blue-600 hover:bg-gray-100 font-semibold"
-              >
-                Start Swapping
-              </Button>
-              <Button 
-                variant="outline" 
-                size="lg"
-                className="text-white border-white hover:bg-white/10 font-semibold"
-              >
-                How It Works
-              </Button>
-            </div>
-          </div>
+    <section className="relative bg-cover bg-center text-white py-32 md:py-48 flex items-center justify-center text-center"
+      style={{ backgroundImage: 'url(/hero-background.jpg)' }} // Add a cool background image to your /public folder
+    >
+      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
+      <div className="relative z-10 max-w-4xl mx-auto px-4">
+        <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-6">
+          Give Your Wardrobe a Second Life
+        </h1>
+        <p className="text-lg md:text-xl text-gray-200 max-w-3xl mx-auto mb-10">
+          Join ReWear, the community-driven platform to swap, share, and discover pre-loved fashion. Reduce waste, refresh your style, and embrace sustainability.
+        </p>
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <Button asChild size="lg">
+            <Link href="/items-listing">Browse Items</Link>
+          </Button>
+          <Button asChild size="lg" variant="secondary">
+            <Link href="/add-item">List an Item</Link>
+          </Button>
         </div>
-        <div className="absolute inset-0 bg-black/20"></div>
       </div>
     </section>
   );

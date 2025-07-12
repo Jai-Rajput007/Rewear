@@ -2,6 +2,7 @@
 
 import * as React from "react"
 import { ThemeProvider as NextThemesProvider } from "next-themes"
+import { AuthProvider } from "@/lib/auth"
 
 type ThemeProviderProps = {
   children: React.ReactNode
@@ -14,14 +15,16 @@ type ThemeProviderProps = {
 
 export function Providers({ children, ...props }: ThemeProviderProps) {
   return (
-    <NextThemesProvider 
-      attribute="class" 
-      defaultTheme="system" 
-      enableSystem
-      disableTransitionOnChange
-      {...props}
-    >
-      {children}
-    </NextThemesProvider>
+    <AuthProvider>
+      <NextThemesProvider 
+        attribute="class" 
+        defaultTheme="system" 
+        enableSystem
+        disableTransitionOnChange
+        {...props}
+      >
+        {children}
+      </NextThemesProvider>
+    </AuthProvider>
   )
 }

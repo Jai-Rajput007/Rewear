@@ -60,4 +60,29 @@ const login = async (req, res) => {
   }
 };
 
+// Create default test user if it doesn't exist
+const createDefaultUser = async () => {
+  try {
+    const defaultEmail = "test@rewear.com";
+    const existingUser = await User.findOne({ email: defaultEmail });
+
+    if (!existingUser) {
+      const salt = await bcrypt.genSalt(10);
+      const hashedPassword = await bcrypt.hash("test123", salt);
+
+      await User.create({
+        name: "Test User",
+        email: defaultEmail,
+        password: hashedPassword,
+      });
+      console.log("Default test user created successfully");
+    }
+  } catch (err) {
+    console.error("Error creating default user:", err);
+  }
+};
+
+// Call it when the server starts
+createDefaultUser();
+
 module.exports = { signup, login };

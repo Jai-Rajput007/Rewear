@@ -1,49 +1,65 @@
 "use client";
 
-import { FiSearch } from 'react-icons/fi';
-import { useRouter } from 'next/navigation';
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import Link from 'next/link';
+import { useAuth } from '@/lib/auth';
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
+import { Button } from './ui/button';
 
 export default function Header() {
-  const router = useRouter();
-
-  const handleAvatarClick = () => {
-    router.push('/user-dashboard');
-  };
+  const { user, isAuthenticated, logout } = useAuth();
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white dark:bg-black shadow-sm">
-      {/* Top Row */}
-      <div className="container mx-auto px-4 py-3 flex justify-between items-center">
-        <div className="text-xl font-bold text-gray-900 dark:text-white">Rewear</div>
+    <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-sm shadow-sm">
+      <div className="container mx-auto px-4 h-20 flex justify-between items-center">
+        <Link href="/" className="text-2xl font-bold text-foreground flex items-center gap-2">
+          <span className="text-teal-500">Re</span>
+          <span>Wear</span>
+        </Link>
+
+        <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
+          <Link href="/items-listing" className="hover:text-teal-500 transition-colors">Browse</Link>
+          <Link href="/#categories" className="hover:text-teal-500 transition-colors">Categories</Link>
+          <Link href="/#how-it-works" className="hover:text-teal-500 transition-colors">How it Works</Link>
+          {isAuthenticated && (
+            <Link href="/add-item" className="hover:text-teal-500 transition-colors">List an Item</Link>
+          )}
+        </nav>
+
         <div className="flex items-center gap-4">
           <ThemeToggle />
-          <button 
-            onClick={handleAvatarClick}
-            className="rounded-full hover:opacity-80 transition-opacity"
-            aria-label="Go to user dashboard"
-          >
-            <Avatar>
-              <AvatarFallback className="bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white">
-                U
-              </AvatarFallback>
-            </Avatar>
-          </button>
-        </div>
-      </div>
-      
-      {/* Bottom Row - Search Bar */}
-      <div className="bg-gray-50 dark:bg-gray-800 py-3 border-t border-gray-100 dark:border-gray-700">
-        <div className="container mx-auto px-4">
-          <div className="relative">
-            <input
-              type="text"
-              placeholder="Search for items..."
-              className="w-full bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg py-2 pl-4 pr-10 focus:outline-none focus:ring-2 focus:ring-blue-500 border border-gray-200 dark:border-gray-600"
-            />
-            <FiSearch className="absolute right-3 top-2.5 text-gray-400 text-xl" />
-          </div>
+          {isAuthenticated ? (
+            <div className="flex items-center gap-4">
+              <Button asChild variant="outline">
+                <Link href="/add-item">List an Item</Link>
+              </Button>
+              <div className="relative group">
+                <Link href="/user-dashboard">
+                  <Avatar className="cursor-pointer">
+                    <AvatarImage src={`https://api.dicebear.com/6.x/initials/svg?seed=${user?.name}`} alt={user?.name} />
+                    <AvatarFallback>{user?.name?.[0].toUpperCase()}</AvatarFallback>
+                  </Avatar>
+                </Link>
+                <div className="absolute top-full right-0 mt-2 w-48 bg-background border rounded-md shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-50">
+                  <div className="p-2">
+                    <p className="font-semibold text-sm px-2 py-1">{user?.name}</p>
+                    <p className="text-xs text-muted-foreground px-2 py-1 mb-2">{user?.email}</p>
+                    <Link href="/user-dashboard" className="block w-full text-left px-2 py-1.5 text-sm hover:bg-accent rounded-sm">Dashboard</Link>
+                    <Button onClick={logout} variant="ghost" className="w-full justify-start px-2 py-1.5 text-sm">Logout</Button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div className="flex items-center gap-2">
+              <Button asChild variant="ghost">
+                <Link href="/login">Login</Link>
+              </Button>
+              <Button asChild>
+                <Link href="/register">Sign Up</Link>
+              </Button>
+            </div>
+          )}
         </div>
       </div>
     </header>
