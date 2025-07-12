@@ -1,11 +1,32 @@
 const express = require("express");
+const cors = require("cors");
+const dotenv = require("dotenv");
+dotenv.config();
+
+const connectDB = require("./config/db");
+const authRoutes = require("./routes/authRoutes");
+const userRoutes = require("./routes/userRoutes");
+
 const app = express();
-const mongoose = require("mongoose");
 
-app.get("/",(req, res)=>{
-    res.send("Hi,I am root");
-})
+// Connect DB
+connectDB();
 
-app.listen(8080,()=>{
-    console.log("server is listening to port 8080");
-})
+// Middlewares
+app.use(cors());
+app.use(express.json());
+
+// Routes
+app.use("/api/auth", authRoutes);
+app.use("/api/user", userRoutes);
+
+
+// Root
+app.get("/", (req, res) => {
+  res.send("ReWear backend is connected to MongoDB!");
+});
+
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, () => {
+  console.log(`🚀 Server is running on port ${PORT}`);
+});
