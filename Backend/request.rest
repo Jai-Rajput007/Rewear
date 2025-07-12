@@ -66,3 +66,7 @@ PATCH http://localhost:8080/api/items/approve/6871f7d0d0e9370245c8c7dc
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NzFlY2YzNzkyOGY2YzFlNTMwYjEzNCIsImlhdCI6MTc1MjMwMzM1MiwiZXhwIjoxNzUyOTA4MTUyfQ.WtPAO-23KBIC6UysFrIocEMkmPA70Y1xREVE1NFiLXc
 Content-Type: application/json
 
+###Test the Redeem API in Postman or REST client:
+PATCH http://localhost:8080/api/items/redeem/6871f7d0d0e9370245c8c7dc
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NzFlY2YzNzkyOGY2YzFlNTMwYjEzNCIsImlhdCI6MTc1MjMwNDM5MSwiZXhwIjoxNzUyOTA5MTkxfQ.2H1PURPXPFunWezz2aQ6qzA4rhoKlofAKq2hXwrthJg
+Content-Type: application/json

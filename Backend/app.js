@@ -8,6 +8,7 @@ const authRoutes = require("./routes/authRoutes");
 const userRoutes = require("./routes/userRoutes");
 const itemRoutes = require("./routes/itemRoutes");
 const swapRoutes = require("./routes/swapRoutes");
+const redeemRoutes = require("./routes/redeemRoutes");
 
 const app = express();
 
@@ -23,8 +24,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api/items", itemRoutes);
 app.use("/api/swaps", swapRoutes);
-
-
+app.use("/api/items", redeemRoutes);
 
 // Root
 app.get("/", (req, res) => {
